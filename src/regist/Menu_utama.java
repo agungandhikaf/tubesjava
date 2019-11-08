@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package regist;
-import java.sql.Connection;
+ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,12 +19,35 @@ import javax.swing.JOptionPane;
 public class Menu_utama extends javax.swing.JFrame {
 Connection con =null;
 Statement st = null;
+ResultSet res = null;
     /**
      * Creates new form Menu_utama
      */
     public Menu_utama() {
         initComponents();
+        load_table();
     }
+    private void load_table(){
+        // membuat tampilan model tabel
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No.");
+        model.addColumn("Nama Matakuliah");
+        model.addColumn("Soal");
+        
+        //menampilkan data database kedalam tabel
+        try {
+            int no=1;
+            String sql = "select * from tubes_soal";
+            con=DriverManager.getConnection("jdbc:mysql://localhost/tubes","root","");
+            st=con.createStatement();
+            res=st.executeQuery(sql);
+            while(res.next()){
+                model.addRow(new Object[]{no++,res.getString(1),res.getString(2)});
+            }
+            tbsoal.setModel(model);
+        } catch (SQLException e) {
+        }
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,13 +64,14 @@ Statement st = null;
         jLabel7 = new javax.swing.JLabel();
         txtnim = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtmk = new javax.swing.JTextField();
+        txtmk = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtsoal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtjawaban = new javax.swing.JTextField();
         btnkirim = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbsoal = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,7 +96,7 @@ Statement st = null;
         jLabel8.setForeground(new java.awt.Color(204, 204, 204));
         jLabel8.setText("Matakuliah");
 
-        txtmk.setBackground(new java.awt.Color(204, 204, 204));
+        txtmk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PBO", "TBO" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,11 +109,11 @@ Statement st = null;
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnim, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtnama, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                    .addComponent(txtnim, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                    .addComponent(txtmk, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,9 +128,9 @@ Statement st = null;
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(251, 36, 52));
@@ -112,12 +138,6 @@ Statement st = null;
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Soal");
-
-        txtsoal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtsoalActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -132,6 +152,19 @@ Statement st = null;
             }
         });
 
+        tbsoal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nama Matakuliah", "Soal"
+            }
+        ));
+        jScrollPane1.setViewportView(tbsoal);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -139,9 +172,9 @@ Statement st = null;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnkirim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtjawaban, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtsoal)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -154,15 +187,15 @@ Statement st = null;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtsoal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtjawaban, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnkirim)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,14 +219,26 @@ Statement st = null;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtsoalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsoalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtsoalActionPerformed
-
     private void btnkirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkirimActionPerformed
         // TODO add your handling code here:
         try {
-            String sql = "INSERT INTO tubes_jawaban VALUES ('"+txtnama.getText()+"','"+txtnim.getText()+"','"+txtmk.getText()+"','"+txtsoal.getText()+"','"+txtjawaban.getText()+"')";
+            String kalimat = txtjawaban.getText();
+            String[] kata = kalimat.split("\\s");
+            int nilai = 0;
+            String siqil = "select * from tubes_soal";
+            con=DriverManager.getConnection("jdbc:mysql://localhost/tubes","root","");
+            st=con.createStatement();
+            res=st.executeQuery(siqil);
+            if(res.next() && res.getString(1).equals(txtmk.getSelectedItem())){
+            for (int i = 0; i < kata.length; i++) {
+            for(int j=3; j<7;j++) {
+                if(kata[i].contains(res.getString(j))){
+                        nilai++;
+                }
+                }
+            }
+            }
+            String sql = "INSERT INTO tubes_jawaban VALUES ('"+txtnama.getText()+"','"+txtnim.getText()+"','"+txtmk.getSelectedItem()+"','"+txtjawaban.getText()+"','"+nilai+"')";
             con = DriverManager.getConnection("jdbc:mysql://localhost/tubes","root","");
             st = con.createStatement();
             java.sql.PreparedStatement 
@@ -249,10 +294,11 @@ Statement st = null;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbsoal;
     private javax.swing.JTextField txtjawaban;
-    private javax.swing.JTextField txtmk;
+    private javax.swing.JComboBox<String> txtmk;
     private javax.swing.JTextField txtnama;
     private javax.swing.JTextField txtnim;
-    private javax.swing.JTextField txtsoal;
     // End of variables declaration//GEN-END:variables
 }
