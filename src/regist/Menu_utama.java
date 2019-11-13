@@ -37,8 +37,8 @@ ResultSet res = null;
         //menampilkan data database kedalam tabel
         try {
             int no=1;
-            String sql = "select * from tubes_soal";
-            con=DriverManager.getConnection("jdbc:mysql://localhost/tubes","root","");
+            String sql = "select * from mkpbo_soal";
+            con=DriverManager.getConnection("jdbc:mysql://localhost/db_essay","root","");
             st=con.createStatement();
             res=st.executeQuery(sql);
             while(res.next()){
@@ -72,6 +72,7 @@ ResultSet res = null;
         btnkirim = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbsoal = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,7 +97,12 @@ ResultSet res = null;
         jLabel8.setForeground(new java.awt.Color(204, 204, 204));
         jLabel8.setText("Matakuliah");
 
-        txtmk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PBO", "TBO" }));
+        txtmk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PBO", "TBO", "Basis Data" }));
+        txtmk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,6 +171,13 @@ ResultSet res = null;
         ));
         jScrollPane1.setViewportView(tbsoal);
 
+        jButton1.setText("Kembali");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -172,14 +185,15 @@ ResultSet res = null;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
                     .addComponent(btnkirim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtjawaban, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -195,7 +209,9 @@ ResultSet res = null;
                 .addComponent(txtjawaban, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnkirim)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,8 +241,8 @@ ResultSet res = null;
             String kalimat = txtjawaban.getText();
             String[] kata = kalimat.split("\\s");
             int nilai = 0;
-            String siqil = "select * from tubes_soal";
-            con=DriverManager.getConnection("jdbc:mysql://localhost/tubes","root","");
+            String siqil = "select * from mkpbo_soal";
+            con=DriverManager.getConnection("jdbc:mysql://localhost/db_essay","root","");
             st=con.createStatement();
             res=st.executeQuery(siqil);
             if(res.next() && res.getString(1).equals(txtmk.getSelectedItem())){
@@ -238,8 +254,8 @@ ResultSet res = null;
                 }
             }
             }
-            String sql = "INSERT INTO tubes_jawaban VALUES ('"+txtnama.getText()+"','"+txtnim.getText()+"','"+txtmk.getSelectedItem()+"','"+txtjawaban.getText()+"','"+nilai+"')";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/tubes","root","");
+            String sql = "INSERT INTO mkpbo_jawaban VALUES ('"+txtnama.getText()+"','"+txtnim.getText()+"','"+txtmk.getSelectedItem()+"','"+txtjawaban.getText()+"','"+nilai+"')";
+            con = DriverManager.getConnection("jdbc:mysql://localhost/db_essay","root","");
             st = con.createStatement();
             java.sql.PreparedStatement 
             pst=con.prepareStatement(sql);
@@ -249,6 +265,16 @@ ResultSet res = null;
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnkirimActionPerformed
+
+    private void txtmkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmkActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmkActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new mkmhs().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,6 +313,7 @@ ResultSet res = null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnkirim;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

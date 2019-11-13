@@ -27,7 +27,7 @@ Statement st= null;
     private void hapuslayar (){
         txtnama.setText("");
         txtuser.setText("");
-        txtpass.setText("");
+        txtulang.setText("");
         txtulang.setText("");
         
         
@@ -49,13 +49,13 @@ Statement st= null;
         txtuser = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtulang = new javax.swing.JTextField();
-        txtpass = new javax.swing.JPasswordField();
+        txtulang = new javax.swing.JPasswordField();
         btnreg = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
         txtstatus = new javax.swing.JLabel();
         txtusertype = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        txtpass = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,14 +105,6 @@ Statement st= null;
             }
         });
 
-        txtpass.setBackground(new java.awt.Color(171, 183, 183));
-        txtpass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtpass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtpassActionPerformed(evt);
-            }
-        });
-
         btnreg.setBackground(new java.awt.Color(83, 51, 237));
         btnreg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnreg.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,6 +142,14 @@ Statement st= null;
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Sudah Punya Akun?");
 
+        txtpass.setBackground(new java.awt.Color(171, 183, 183));
+        txtpass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpassActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,8 +165,8 @@ Statement st= null;
                             .addComponent(jLabel3))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtuser)
-                            .addComponent(txtpass)))
+                            .addComponent(txtpass)
+                            .addComponent(txtuser)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(txtstatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,15 +196,21 @@ Statement st= null;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtulang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtulang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtstatus)
                     .addComponent(txtusertype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -234,7 +240,7 @@ Statement st= null;
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 15, Short.MAX_VALUE)
+                .addGap(0, 9, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -271,22 +277,18 @@ Statement st= null;
         // TODO add your handling code here:
     }//GEN-LAST:event_txtulangActionPerformed
 
-    private void txtpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtpassActionPerformed
-
     private void btnregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregActionPerformed
         // TODO add your handling code here:
         try {
-           if (txtpass.getPassword().equals("")|| txtuser.getText().equals("") || txtnama.getText().equals("") ||txtusertype.getSelectedItem().equals("")){
+           if (txtulang.getPassword().equals("")|| txtuser.getText().equals("") || txtnama.getText().equals("") ||txtusertype.getSelectedItem().equals("")){
            JOptionPane.showMessageDialog(this,"Data Tidak Boleh Kososng","Pesan",JOptionPane.ERROR_MESSAGE);
            hapuslayar();
            }else {
            Class.forName("com.mysql.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost/tubes","root","");
+           con = DriverManager.getConnection("jdbc:mysql://localhost/db_essay","root","");
            st = con.createStatement();
-          String simpan = "insert into tubes_login values ('"+txtuser.getText()+"','"
-                  +String.valueOf(txtpass.getPassword())+"','"+txtnama.getText()+"','"+txtusertype.getSelectedItem()+"')";
+          String simpan = "insert into register values ('"+txtuser.getText()+"','"
+                  +String.valueOf(txtulang.getPassword())+"','"+txtnama.getText()+"','"+txtusertype.getSelectedItem()+"')";
           st=con.createStatement();
           int SA = st.executeUpdate(simpan);
           JOptionPane.showMessageDialog(this, "Registrasi Berhasil");
@@ -308,6 +310,10 @@ Statement st= null;
     private void txtusertypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusertypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtusertypeActionPerformed
+
+    private void txtpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,7 +364,7 @@ Statement st= null;
     private javax.swing.JTextField txtnama;
     private javax.swing.JPasswordField txtpass;
     private javax.swing.JLabel txtstatus;
-    private javax.swing.JTextField txtulang;
+    private javax.swing.JPasswordField txtulang;
     private javax.swing.JTextField txtuser;
     private javax.swing.JComboBox<String> txtusertype;
     // End of variables declaration//GEN-END:variables

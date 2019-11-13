@@ -24,7 +24,7 @@ Statement st = null;
         initComponents();
         try {
 Class.forName("com.mysql.jdbc.Driver");
-con=DriverManager.getConnection("jdbc:mysql://localhost/tubes","root","");
+con=DriverManager.getConnection("jdbc:mysql://localhost/db_essay","root","");
 st=con.createStatement();
 JOptionPane.showMessageDialog(null, "Berhasil Koneksi");
 }catch(Exception ex){
@@ -39,15 +39,15 @@ txtuser.requestFocus();
 hapuslayar();
 }else{
 st = con.createStatement();
-String sql = ("SELECT * FROM tubes_login WHERE 	username = '"+txtuser.getText()+"' AND 	password = '"+String.valueOf(txtpass.getPassword())+"'");
+String sql = ("SELECT * FROM register WHERE username = '"+txtuser.getText()+"' AND 	password = '"+String.valueOf(txtpass.getPassword())+"'");
 ResultSet rs = st.executeQuery(sql);
 if(rs.next()){
 this.dispose();
 String level=(rs.getString("usertype"));
 if(level.equals("Dosen")){
-new Menu_Dosen().setVisible(true);
+new mkdos().setVisible(true);
 }else{
-new Menu_utama().setVisible(true);
+new mkmhs().setVisible(true);
 }
 }else{
 JOptionPane.showMessageDialog(rootPane, "Username dan Password Salah\nAtau Akun Belum Terdaftar", "Pesan", JOptionPane.ERROR_MESSAGE);
